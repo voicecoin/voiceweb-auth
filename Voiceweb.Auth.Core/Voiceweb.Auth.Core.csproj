@@ -8,7 +8,6 @@
     <PackageReference Include="AWSSDK.SimpleEmail" Version="3.3.6.6" />
     <PackageReference Include="EntityFrameworkCore.BootKit" Version="1.5.4" />
     <PackageReference Include="Gmail.Api" Version="1.0.2" />
-    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.33.0.1173" />
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.0.2" />
