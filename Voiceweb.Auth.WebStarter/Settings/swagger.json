@@ -1,0 +1,12 @@
+﻿{
+  "Swagger": {
+    "Contact": {
+      "Email": "support@voicecoin.com",
+      "Name": "Voiceweb"
+    },
+    "Description": "Voiceweb User Authentication/ Authorization API",
+    "TermsOfService": "MIT",
+    "Title": "Voiceweb OAuth API",
+    "Version": "v1"
+  }
+}

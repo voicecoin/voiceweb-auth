@@ -1,0 +1,20 @@
+﻿{
+  "Email": {
+    "Name": "Voiceweb",
+    "From": "@gmail.com"
+  },
+
+  "UserActivationEmail": {
+    "Subject": "Account Activation",
+    "Template": "EmailTemplates/UserActivation"
+  },
+
+  "CloudRail": {
+    "AppKey": ""
+  },
+
+  "MailJet": {
+    "Key": "",
+    "Secret": ""
+  }
+}
