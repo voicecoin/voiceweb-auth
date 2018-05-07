@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -10,15 +8,10 @@ namespace Voiceweb.Auth.Core.Utilities
     {
         public static string Hash(string password, string salt)
         {
-            // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: Convert.FromBase64String(salt),
-                prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
+            var bytes = ASCIIEncoding.ASCII.GetBytes(password + salt);
+            var hashed = new MD5CryptoServiceProvider().ComputeHash(bytes);
 
-            return hashed;
+            return Convert.ToBase64String(hashed);
         }
 
         public static string GetSalt()

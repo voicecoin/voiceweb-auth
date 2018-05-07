@@ -70,8 +70,8 @@ namespace Voiceweb.Auth.Core
                 }
             }
 
-            var ses = new CloudRailGmailHelper();
-            string emailId = await ses.Send(model, config);
+            //var ses = new CloudRailGmailHelper();
+            string emailId = "";// await ses.Send(model, config);
 
             $"Created user {user.Email}, user id: {user.Id}, sent email: {emailId}.".Log(LogLevel.INFO);
         }
