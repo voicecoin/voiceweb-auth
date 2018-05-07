@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Voiceweb.Auth.Core;
 using Voiceweb.Auth.Core.DbTables;
-using Voiceweb.Auth.Core.EmailHelpers;
 using Voiceweb.Auth.WebStarter.ViewModels;
 
 namespace Voiceweb.Auth.WebStarter.Controllers
@@ -46,6 +45,23 @@ namespace Voiceweb.Auth.WebStarter.Controllers
             });
 
             return Ok("Register successfully. Please active your account through email.");
+        }
+
+        [HttpGet("/account")]
+        public Object Account()
+        {
+            var user = dc.Table<TUser>().Find(CurrentUserId);
+
+            return new
+            {
+                user.Id,
+                Avatar = "",
+                user.Description,
+                user.Email,
+                user.FirstName,
+                user.LastName,
+                user.UserName
+            };
         }
     }
 }

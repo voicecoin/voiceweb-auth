@@ -17,12 +17,12 @@ namespace Voiceweb.Auth.Core.Initializers
             {
                 dc.Table<TRole>().AddRange(new TRole
                 {
-                    Id = AccountCore.ADMIN_ROLE_ID,
+                    Id = TRole.ADMIN_ROLE_ID,
                     Name = "Admin User"
                 },
                 new TRole
                 {
-                    Id = AccountCore.AUTH_ROLE_ID,
+                    Id = TRole.AUTH_ROLE_ID,
                     Name = "Authenticated User"
                 });
             }

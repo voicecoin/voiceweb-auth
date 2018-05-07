@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Voiceweb.Auth.Core.Utilities;
 
@@ -18,9 +19,12 @@ namespace Voiceweb.Auth.Core.Initializers
             var appsLoaders = TypeHelper.GetInstanceWithInterface<IHookDbInitializer>("Voiceweb.Auth.Core");
             var dc = new DefaultDataContextLoader().GetDefaultDc();
 
-            appsLoaders.ForEach(loader => {
-                dc.DbTran(() => loader.Load(dc));
-            });
+            appsLoaders.OrderBy(x => x.Priority)
+                .ToList()
+                .ForEach(loader =>
+                {
+                    dc.DbTran(() => loader.Load(dc));
+                });
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿{
   "Email": {
     "Name": "Voiceweb",
-    "From": "@gmail.com"
+    "From": "haiping008@gmail.com"
   },
 
   "UserActivationEmail": {
@@ -10,11 +10,11 @@
   },
 
   "CloudRail": {
-    "AppKey": ""
+    "AppKey": "5ae5294653d06b4cef730d41"
   },
 
   "MailJet": {
-    "Key": "",
-    "Secret": ""
+    "Key": "f3eddd6ce4b0c7816a3bfc51a415e997",
+    "Secret": "e2743e29bcaef659a197a9a14319b7b1"
   }
 }

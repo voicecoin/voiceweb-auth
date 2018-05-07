@@ -18,9 +18,6 @@ namespace Voiceweb.Auth.Core
         private IConfiguration config;
         private static RazorLightEngine engine;
 
-        public const String ADMIN_ROLE_ID = "214f29aa-40e5-4bf1-a74a-f202309f981d";
-        public const String AUTH_ROLE_ID = "148b79c1-1feb-4f70-af40-3278d1963234";
-
         public AccountCore(Database db, IConfiguration config)
         {
             dc = db;
@@ -37,7 +34,7 @@ namespace Voiceweb.Auth.Core
 
             dc.Table<TRolesOfUser>().Add(new TRolesOfUser
             {
-                RoleId = AUTH_ROLE_ID,
+                RoleId = TRole.AUTH_ROLE_ID,
                 UserId = user.Id
             });
 
