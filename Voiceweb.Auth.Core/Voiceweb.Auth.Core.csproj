@@ -5,15 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="EmailHelpers\CloudRailGmailHelper.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AWSSDK.SimpleEmail" Version="3.3.6.6" />
     <PackageReference Include="EntityFrameworkCore.BootKit" Version="1.5.4" />
+    <PackageReference Include="Gmail.Api" Version="1.0.2" />
     <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="RazorLight" Version="2.0.0-beta1" />
   </ItemGroup>
