@@ -25,7 +25,7 @@ namespace Voiceweb.Auth.WebStarter
                         config.AddJsonFile(setting, optional: false, reloadOnChange: true);
                     });
                 })
-                .UseUrls("http://localhost:8888")
+                .UseUrls("http://0.0.0.0:127")
                 .UseStartup<Startup>()
                 .Build();
     }

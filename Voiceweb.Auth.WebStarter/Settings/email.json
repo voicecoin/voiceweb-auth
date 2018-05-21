@@ -1,5 +1,6 @@
 ﻿{
   "Email": {
+    "EnableEmailNotification": false,
     "Name": "Voiceweb",
     "From": "haiping008@gmail.com"
   },

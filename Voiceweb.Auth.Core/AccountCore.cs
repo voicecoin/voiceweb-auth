@@ -26,6 +26,7 @@ namespace Voiceweb.Auth.Core
 
         public async Task CreateUser(TUser user)
         {
+            user.Authenticaiton.IsActivated = (config.GetSection("Email:EnableEmailNotification").Value == "False");
             user.Authenticaiton.Salt = PasswordHelper.GetSalt();
             user.Authenticaiton.Password = PasswordHelper.Hash(user.Authenticaiton.Password, user.Authenticaiton.Salt);
             user.Authenticaiton.ActivationCode = Guid.NewGuid().ToString("N");
@@ -40,40 +41,43 @@ namespace Voiceweb.Auth.Core
 
             dc.SaveChanges();
 
-            EmailRequestModel model = new EmailRequestModel();
-
-            model.Subject = config.GetSection("UserActivationEmail:Subject").Value;
-            model.ToAddresses = user.Email;
-            model.Template = config.GetSection("UserActivationEmail:Template").Value;
-
-            if (!String.IsNullOrEmpty(model.Template))
+            if (config.GetSection("Email:EnableEmailNotification").Value == "True")
             {
-                if (engine == null)
+                EmailRequestModel model = new EmailRequestModel();
+
+                model.Subject = config.GetSection("UserActivationEmail:Subject").Value;
+                model.ToAddresses = user.Email;
+                model.Template = config.GetSection("UserActivationEmail:Template").Value;
+
+                if (!String.IsNullOrEmpty(model.Template))
                 {
-                    engine = new RazorLightEngineBuilder()
-                      .UseFilesystemProject(Database.ContentRootPath + $"{Path.DirectorySeparatorChar}App_Data")
-                      .UseMemoryCachingProvider()
-                      .Build();
+                    if (engine == null)
+                    {
+                        engine = new RazorLightEngineBuilder()
+                          .UseFilesystemProject(Database.ContentRootPath + $"{Path.DirectorySeparatorChar}App_Data")
+                          .UseMemoryCachingProvider()
+                          .Build();
+                    }
+
+                    var cacheResult = engine.TemplateCache.RetrieveTemplate(model.Template);
+
+                    var emailModel = new { Host = config.GetSection("ClientHost").Value, ActivationCode = user.Authenticaiton.ActivationCode };
+
+                    if (cacheResult.Success)
+                    {
+                        model.Body = await engine.RenderTemplateAsync(cacheResult.Template.TemplatePageFactory(), emailModel);
+                    }
+                    else
+                    {
+                        model.Body = await engine.CompileRenderAsync(model.Template, emailModel);
+                    }
                 }
 
-                var cacheResult = engine.TemplateCache.RetrieveTemplate(model.Template);
-
-                var emailModel = new { Host = config.GetSection("ClientHost").Value, ActivationCode = user.Authenticaiton.ActivationCode };
-
-                if (cacheResult.Success)
-                {
-                    model.Body = await engine.RenderTemplateAsync(cacheResult.Template.TemplatePageFactory(), emailModel);
-                }
-                else
-                {
-                    model.Body = await engine.CompileRenderAsync(model.Template, emailModel);
-                }
+                var ses = new CloudRailGmailHelper();
+                string emailId = await ses.Send(model, config);
             }
 
-            var ses = new CloudRailGmailHelper();
-            string emailId = await ses.Send(model, config);
-
-            $"Created user {user.Email}, user id: {user.Id}, sent email: {emailId}.".Log(LogLevel.INFO);
+            $"Created user {user.Email}, user id: {user.Id}".Log(LogLevel.INFO);
         }
     }
 }
