@@ -10,17 +10,17 @@ namespace Voiceweb.Auth.Core.DbTables
     /// <summary>
     /// Roles of user
     /// </summary>
-    [Table("RolesOfUsers")]
-    public class TRolesOfUser : DbRecord, IDbRecord
+    [Table("Auth_RolesOfUsers")]
+    public class TbRolesOfUser : DbRecord, IAuthDbRecord
     {
         [StringLength(36)]
         public String UserId { get; set; }
 
-        public TUser User { get; set; }
+        public TbUser User { get; set; }
 
         [StringLength(36)]
         public String RoleId { get; set; }
 
-        public TRole Role { get; set; }
+        public TbRole Role { get; set; }
     }
 }

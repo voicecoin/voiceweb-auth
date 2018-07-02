@@ -7,9 +7,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Voiceweb.Auth.Core;
 using Voiceweb.Auth.Core.DbTables;
-using Voiceweb.Auth.WebStarter.ViewModels;
+using Voiceweb.Auth.RestApi.ViewModels;
 
-namespace Voiceweb.Auth.WebStarter.Controllers
+namespace Voiceweb.Auth.RestApi
 {
     /// <summary>
     /// User account
@@ -25,14 +25,14 @@ namespace Voiceweb.Auth.WebStarter.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] VmUserRegister account)
         {
-            var existedUser = dc.Table<TUser>().Any(x => x.Email.ToLower() == account.Email.ToLower() ||
+            var existedUser = dc.Table<TbUser>().Any(x => x.Email.ToLower() == account.Email.ToLower() ||
                 x.UserName.ToLower() == account.Email.ToLower());
 
             if (existedUser) return BadRequest("Account already existed");
 
-            var user = new TUser
+            var user = new TbUser
             {
-                Authenticaiton = new TUserAuth { Password = account.Password },
+                Authenticaiton = new TbUserAuth { Password = account.Password },
                 Email = account.Email,
                 UserName = account.Email,
                 FirstName = account.FullName.Split(' ').First(),
@@ -50,7 +50,7 @@ namespace Voiceweb.Auth.WebStarter.Controllers
         [HttpGet("/account")]
         public Object Account()
         {
-            var user = dc.Table<TUser>().Find(CurrentUserId);
+            var user = dc.Table<TbUser>().Find(CurrentUserId);
 
             return new
             {

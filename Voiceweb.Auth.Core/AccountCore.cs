@@ -24,18 +24,18 @@ namespace Voiceweb.Auth.Core
             this.config = config;
         }
 
-        public async Task CreateUser(TUser user)
+        public async Task CreateUser(TbUser user)
         {
             user.Authenticaiton.IsActivated = (config.GetSection("Email:EnableEmailNotification").Value == "False");
             user.Authenticaiton.Salt = PasswordHelper.GetSalt();
             user.Authenticaiton.Password = PasswordHelper.Hash(user.Authenticaiton.Password, user.Authenticaiton.Salt);
             user.Authenticaiton.ActivationCode = Guid.NewGuid().ToString("N");
 
-            dc.Table<TUser>().Add(user);
+            dc.Table<TbUser>().Add(user);
 
-            dc.Table<TRolesOfUser>().Add(new TRolesOfUser
+            dc.Table<TbRolesOfUser>().Add(new TbRolesOfUser
             {
-                RoleId = TRole.AUTH_ROLE_ID,
+                RoleId = TbRole.AUTH_ROLE_ID,
                 UserId = user.Id
             });
 
@@ -73,8 +73,8 @@ namespace Voiceweb.Auth.Core
                     }
                 }
 
-                var ses = new CloudRailGmailHelper();
-                string emailId = await ses.Send(model, config);
+                //var ses = new CloudRailGmailHelper();
+                string emailId = "";// ""await ses.Send(model, config);
             }
 
             $"Created user {user.Email}, user id: {user.Id}".Log(LogLevel.INFO);

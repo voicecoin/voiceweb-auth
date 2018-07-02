@@ -5,13 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Voiceweb.Auth.Core.DbTables;
 
-namespace Voiceweb.Auth.WebStarter.Controllers
+namespace Voiceweb.Auth.RestApi
 {
     [Authorize]
     [Produces("application/json")]
     [Route("[controller]")]
-    [ServiceFilter(typeof(ApiExceptionFilter))]
+    //[ServiceFilter(typeof(ApiExceptionFilter))]
     public class CoreController : ControllerBase
     {
         protected readonly Database dc;
@@ -20,7 +21,7 @@ namespace Voiceweb.Auth.WebStarter.Controllers
 
         public CoreController()
         {
-            dc = new DefaultDataContextLoader().GetDefaultDc();
+            dc = new DefaultDataContextLoader().GetDefaultDc<IAuthDbRecord>("VoicewebAuth");
         }
 
         protected String GetConfig(string path)

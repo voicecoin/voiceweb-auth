@@ -4,13 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq.Dynamic.Core;
 using EntityFrameworkCore.BootKit;
-using Voicebot.RestApi.ViewModels;
 using Voiceweb.Auth.Core.DbTables;
-using Voiceweb.Auth.Core;
 using Voiceweb.Auth.Core.JwtHelper;
 using Voiceweb.Auth.Core.Utilities;
+using Voicebot.Auth.RestApi.ViewModels;
 
-namespace Voiceweb.Auth.WebStarter.Controllers
+namespace Voiceweb.Auth.RestApi
 {
     /// <summary>
     /// User authentication
@@ -33,8 +32,8 @@ namespace Voiceweb.Auth.WebStarter.Controllers
             }
 
             // validate from local
-            var user = (from usr in dc.Table<TUser>()
-                        join auth in dc.Table<TUserAuth>() on usr.Id equals auth.UserId
+            var user = (from usr in dc.Table<TbUser>()
+                        join auth in dc.Table<TbUserAuth>() on usr.Id equals auth.UserId
                         where usr.Email == userModel.UserName
                         select auth).FirstOrDefault();
 

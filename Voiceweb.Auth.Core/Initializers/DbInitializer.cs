@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Voiceweb.Auth.Core.DbTables;
 using Voiceweb.Auth.Core.Utilities;
 
 namespace Voiceweb.Auth.Core.Initializers
@@ -13,7 +14,7 @@ namespace Voiceweb.Auth.Core.Initializers
 
         public void Initialize()
         {
-            var dc = new DefaultDataContextLoader().GetDefaultDc();
+            var dc = new DefaultDataContextLoader().GetDefaultDc2<IAuthDbRecord>("VoicewebAuth");
 
             var instances = TypeHelper.GetInstanceWithInterface<IHookDbInitializer>(Database.Assemblies).OrderBy(x => x.Priority).ToList();
 
@@ -21,7 +22,7 @@ namespace Voiceweb.Auth.Core.Initializers
             {
                 DateTime start = DateTime.UtcNow;
                 Console.WriteLine($"{instances[idx].ToString()} P:{instances[idx].Priority} started at {DateTime.UtcNow}");
-                int effected = dc.DbTran(() => instances[idx].Load(dc));
+                int effected = dc.Transaction<IAuthDbRecord>(() => instances[idx].Load(dc));
                 Console.WriteLine($"{instances[idx].ToString()} effected [{effected}] records in {(DateTime.UtcNow - start).TotalMilliseconds} ms");
             }
         }

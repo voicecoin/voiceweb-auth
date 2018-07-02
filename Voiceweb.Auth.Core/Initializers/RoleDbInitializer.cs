@@ -13,16 +13,16 @@ namespace Voiceweb.Auth.Core.Initializers
 
         public void Load(Database dc)
         {
-            if (!dc.Table<TRole>().Any())
+            if (!dc.Table<TbRole>().Any())
             {
-                dc.Table<TRole>().AddRange(new TRole
+                dc.Table<TbRole>().AddRange(new TbRole
                 {
-                    Id = TRole.ADMIN_ROLE_ID,
+                    Id = TbRole.ADMIN_ROLE_ID,
                     Name = "Admin User"
                 },
-                new TRole
+                new TbRole
                 {
-                    Id = TRole.AUTH_ROLE_ID,
+                    Id = TbRole.AUTH_ROLE_ID,
                     Name = "Authenticated User"
                 });
             }

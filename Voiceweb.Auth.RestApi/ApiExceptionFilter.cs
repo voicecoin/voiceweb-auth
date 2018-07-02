@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Voiceweb.Auth.Core;
 using Voiceweb.Auth.Core.Utilities;
 
-namespace Voiceweb.Auth.WebStarter
+namespace Voiceweb.Auth.RestApi
 {
     public class ApiExceptionFilter : ExceptionFilterAttribute
     {

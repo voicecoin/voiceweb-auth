@@ -10,8 +10,8 @@ namespace Voiceweb.Auth.Core.DbTables
     /// <summary>
     /// User profile
     /// </summary>
-    [Table("Users")]
-    public class TUser : DbRecord, IDbRecord
+    [Table("Auth_Users")]
+    public class TbUser : DbRecord, IAuthDbRecord
     {
         [Required]
         [StringLength(64)]
@@ -38,11 +38,11 @@ namespace Voiceweb.Auth.Core.DbTables
         [NotMapped]
         public String FullName { get { return $"{FirstName} {LastName}"; } }
 
-        public List<TRolesOfUser> Roles { get; set; }
+        public List<TbRolesOfUser> Roles { get; set; }
 
-        public TUserAuth Authenticaiton { get; set; }
+        public TbUserAuth Authenticaiton { get; set; }
 
-        public TUser()
+        public TbUser()
         {
             SignupDate = DateTime.UtcNow;
         }

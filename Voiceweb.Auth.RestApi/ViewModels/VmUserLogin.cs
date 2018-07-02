@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Voicebot.RestApi.ViewModels
+namespace Voicebot.Auth.RestApi.ViewModels
 {
     /// <summary>
     /// User login view model

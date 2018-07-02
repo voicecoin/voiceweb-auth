@@ -10,8 +10,8 @@ namespace Voiceweb.Auth.Core.DbTables
     /// <summary>
     /// User authentication
     /// </summary>
-    [Table("UsersAuths")]
-    public class TUserAuth : DbRecord, IDbRecord
+    [Table("Auth_UsersAuths")]
+    public class TbUserAuth : DbRecord, IAuthDbRecord
     {
         [StringLength(36)]
         public String UserId { get; set; }
@@ -31,6 +31,6 @@ namespace Voiceweb.Auth.Core.DbTables
         public Boolean IsActivated { get; set; }
 
         [ForeignKey("UserId")]
-        public TUser User { get; set; }
+        public TbUser User { get; set; }
     }
 }

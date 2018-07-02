@@ -5,9 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Voiceweb.Auth.Core.Initializers;
 using Voiceweb.Auth.Core.Utilities;
 
-namespace Voiceweb.Auth.Core.Initializers
+namespace Voiceweb.Auth.WebStarter
 {
     public class InitializationLoader
     {

@@ -7,8 +7,8 @@ using System.Text;
 
 namespace Voiceweb.Auth.Core.DbTables
 {
-    [Table("Roles")]
-    public class TRole : DbRecord, IDbRecord
+    [Table("Auth_Roles")]
+    public class TbRole : DbRecord, IAuthDbRecord
     {
         public const String ADMIN_ROLE_ID = "214f29aa-40e5-4bf1-a74a-f202309f981d";
         public const String AUTH_ROLE_ID = "148b79c1-1feb-4f70-af40-3278d1963234";

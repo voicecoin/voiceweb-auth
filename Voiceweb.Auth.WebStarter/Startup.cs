@@ -8,9 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
-using Voiceweb.Auth.Core;
-using Voiceweb.Auth.Core.Initializers;
 using Voiceweb.Auth.Core.JwtHelper;
+using Voiceweb.Auth.RestApi;
 
 namespace Voiceweb.Auth.WebStarter
 {

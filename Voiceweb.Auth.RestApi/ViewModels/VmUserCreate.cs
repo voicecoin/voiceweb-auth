@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Voiceweb.Auth.WebStarter.ViewModels
+namespace Voiceweb.Auth.RestApi.ViewModels
 {
     public class VmUserRegister
     {
